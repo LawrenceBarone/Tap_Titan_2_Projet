@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "Tap Titan 2 Projet TP"
