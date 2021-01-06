@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     TextView info,Gold;
     RelativeLayout test;
     ProgressBar pv;
-
+    float Thomas;
     int compteur,vie,Maxvie,puissance;
 
     @Override
