@@ -2,8 +2,12 @@ package com.example.taptitan2projettp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -11,57 +15,40 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView tap;
-    TextView info,Gold;
-    RelativeLayout test;
-    ProgressBar pv;
-    float Thomas;
-    int compteur,vie,Maxvie,puissance;
+    public static Editable Retournom;
+    public static String nom;
+    Intent Jeux;
+    TextView TapTitre;
+    //String nom;
+    Button valide;
+    String NomJeux;
+    EditText lieuxnom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tap = findViewById(R.id.image);
-        info = findViewById(R.id.Textvieuw);
-        Gold = findViewById(R.id.argent);
-        test = findViewById(R.id.linear);
-        pv = findViewById(R.id.progressBar);
-        compteur = 0;
-        Maxvie = 100;
-        vie = Maxvie;
-        pv.setMax(Maxvie);
-        pv.setProgress(vie);
-        puissance = 1;
 
+        Jeux = new Intent(getApplicationContext(),LesMecaniques.class);
+        TapTitre =findViewById(R.id.LeNom);
 
-
-
-        test.setOnClickListener(new View.OnClickListener() {
+        TapTitre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (vie >=1)
-                {
-                    vie= vie-puissance;
-                    pv.setProgress(vie);
-
-                }
-                else
-                {
-                    Maxvie = Maxvie+50;
-                    vie = Maxvie;
-                    pv.setMax(Maxvie);
-                    pv.setProgress(vie);
-                    puissance = puissance+10;
-                    compteur = compteur+600;
-                }
-                info.setText("Vie: " + String.valueOf(vie));
-                Gold.setText("Gold: " + String.valueOf(compteur));
+                startActivity(Jeux);
             }
         });
-
-
+        valide = findViewById(R.id.button2);
+        lieuxnom = findViewById(R.id.editTextTextPersonName);
+        valide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Retournom = lieuxnom.getText();
+                nom = String.valueOf(Retournom);
+                startActivity(Jeux);
+            }
+        });
 
     }
 
