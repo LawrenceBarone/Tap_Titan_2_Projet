@@ -60,17 +60,17 @@ public class Mecanique extends RecyclerView.Adapter<Mecanique.MyViewHolder>
             @Override
             public void onClick(View v) {
                 //Log.i("la",String.valueOf(Integer.valueOf(prix[position])));
-                Leprix =Integer.valueOf(prix[position]);
+                //Leprix =Integer.valueOf(prix[position]);
                 //Log.i("la",String.valueOf(Integer.valueOf(prix[position])));
                 //Log.i("la",String.valueOf(argent));
-                if(argent >= Leprix)
-                {
+                //if(argent >= Leprix)
+                //{
                     //Log.i("la","Up: "+ Force[position]);
-                    argent = Leprix;
+                   // argent = Leprix;
                     test = Integer.valueOf(Force[position]);
                     LesMecaniques.changer_puissance(test);
-                    LesMecaniques.changer_argent(argent);
-                }
+                   // LesMecaniques.changer_argent(argent);
+                //}
             }
         });
         Log.i("test","3");

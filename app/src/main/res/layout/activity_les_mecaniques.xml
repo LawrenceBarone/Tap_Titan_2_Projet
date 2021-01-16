@@ -13,98 +13,97 @@
     >
 
     <RelativeLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="110mm"
-        android:id="@+id/linear"
 
         >
+
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:text="Gold: 0"
-            android:layout_marginTop="80dp"
             android:id="@+id/argent"
-            android:textColor="@color/white"
-            />
-
-
-        <TextView
             android:layout_width="100dp"
             android:layout_height="20dp"
-            android:text="Nom"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="80dp"
+            android:text="Gold: 0"
+            android:textColor="@color/white" />
+
+
+        <TextView
             android:id="@+id/nom"
-            android:textColor="@color/red"
-            />
-        <TextView
-            android:layout_width="200dp"
+            android:layout_width="100dp"
             android:layout_height="20dp"
-            android:text="Classement: 0"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
+            android:text="Nom"
+            android:textColor="@color/red" />
+
+        <TextView
             android:id="@+id/Classement"
-            android:layout_marginLeft="200dp"
-            android:textColor="@color/white"
-            />
-        <TextView
             android:layout_width="200dp"
             android:layout_height="20dp"
-            android:text="Classementpersonnelle: 0"
+            android:layout_marginLeft="200dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/Classement_perso"
-            android:textColor="@color/white"
-            />
+            android:text="Classement: 0"
+            android:textColor="@color/white" />
+
         <TextView
+            android:id="@+id/Classement_perso"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Classementpersonnelle: 0"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/Textvieuw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="250dp"
             android:text="Vie: 100"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/Textvieuw"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="250dp"
-            android:textColor="@color/white"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="300px"
             android:layout_height="400px"
-            android:src="@drawable/a"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            />
+            android:src="@drawable/a" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200px"
             android:layout_height="50px"
-            android:layout_weight="1"
-            android:layout_marginTop="270dp"
-            android:progress="@android:integer/status_bar_notification_info_maxnum"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="270dp"
+            android:layout_weight="1"
+            android:progress="@android:integer/status_bar_notification_info_maxnum"
 
             />
+
         <TextView
+            android:id="@+id/ForcePerso"
             android:layout_width="200dp"
             android:layout_height="20dp"
-            android:text="Force: "
-            android:layout_marginTop="150dp"
-            android:id="@+id/ForcePerso"
             android:layout_marginLeft="270dp"
-            android:textColor="@color/white"
-            />
+            android:layout_marginTop="150dp"
+            android:text="Force: "
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
-            android:layout_marginTop="90mm"
             android:layout_marginLeft="300dp"
-            />
+            android:layout_marginTop="90mm"
+            android:text="-" />
+
+
 
     </RelativeLayout>
 
@@ -113,16 +112,46 @@
         android:layout_height="match_parent"
         android:id="@+id/linearRecycle"
         android:layout_marginTop="150mm"
+        android:background="@drawable/c"
         >
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/Recycler"
-            android:background="@color/black"
+            android:background="@drawable/c"
             />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Guild"
+        android:layout_marginTop="100mm"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Guidl"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:id="@+id/LeNomGuild"
+            android:textColor="@color/white"
+            />
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/buttonGuild"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="00dp"
+        android:layout_marginTop="90mm"
+        android:text="Guild" />
 
 </RelativeLayout>

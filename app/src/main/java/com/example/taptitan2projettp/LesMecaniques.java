@@ -26,20 +26,20 @@ public class LesMecaniques extends AppCompatActivity {
 
 
     MediaPlayer mediaPlayer;
-    private static int puissance;
-    private static int compteur;
+    private static int puissance,PuissancRecu;
+    public static int compteur;
     ImageView tap,Amelioration;
     TextView info,Gold,Force,nom,ScorePerso,HightScore;
     RelativeLayout test, PartiJeux;
-    LinearLayout parti_amelioration;
+    LinearLayout parti_amelioration,parti_Guild;
     ProgressBar pv;
     boolean Thomas;
-    int Maxvie,vie,MonsteActuelle = 0,Score = 0,UpVie=50,ScoreMonde,FondAcutelle = 1,ChangerFond=10;//,puissance,compteur
+    int Maxvie,vie,MonsteActuelle = 0,Score = 0,UpVie=50,ScoreMonde,FondAcutelle = 1,ChangerFond=10,Recompence = 600;//,puissance,compteur
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Mecanique adapter;
-    Button ouvrir_fermer;
-    boolean on;
+    Button ouvrir_fermer,guild;
+    boolean on,on_Guild;
     public String ListNomArme[]=
             {
               "epee en bois", "epee en pierre","epee en fer","epee en or","epee en diamant"
@@ -64,16 +64,16 @@ public class LesMecaniques extends AppCompatActivity {
             };
     public int Fond[]=
             {
-                    R.drawable.b,R.drawable.b,R.drawable.fond1,R.drawable.fond2,R.drawable.fond4
+                    R.drawable.b,R.drawable.b,R.drawable.fond1,R.drawable.fond2,R.drawable.fond4,R.drawable.fond3
             };
 
-    public static int changer_puissance(int test) {
-        puissance =puissance+test;
-        return puissance;
+    public static void changer_puissance(int test) {
+        PuissancRecu = test;
     }
     public static int changer_argent(int rest) {
 
         compteur = compteur - rest;
+
         return compteur;
     }
     String nomperso;
@@ -104,14 +104,17 @@ public class LesMecaniques extends AppCompatActivity {
         ScorePerso = findViewById(R.id.Classement_perso);
         HightScore = findViewById(R.id.Classement);
         PartiJeux = findViewById(R.id.Background);
+        guild = findViewById(R.id.buttonGuild);
+        parti_Guild = findViewById(R.id.Guild);
         tap.setImageResource(MonstreImage[MonsteActuelle]);
-        compteur = 15000;
+        compteur = 900;
         Maxvie = 100;
         vie = Maxvie;
         pv.setMax(Maxvie);
         pv.setProgress(vie);
         puissance = 1;
         on = false;
+        on_Guild = false;
         Force.setText("Force: " + String.valueOf(puissance));
         ScoreMonde = 0;
         Handler mHandler = new Handler();
@@ -131,13 +134,14 @@ public class LesMecaniques extends AppCompatActivity {
                     pv.setMax(Maxvie);
                     pv.setProgress(vie);
                     //puissance = puissance+10;
-                    compteur = compteur+600;
-                    Toast.makeText(LesMecaniques.this,"Montre Vaincu", Toast.LENGTH_SHORT).show();
+                    compteur = compteur+Recompence;
+                    //Toast.makeText(LesMecaniques.this,"Montre Vaincu", Toast.LENGTH_SHORT).show();
                     tuer();
                     Score++;
                     if(Score %10 == 0)
                     {
                         UpVie = UpVie*10;
+                        Recompence = Recompence*3;
                     }
                     if(Score >= ScoreMonde)
                     {
@@ -145,6 +149,7 @@ public class LesMecaniques extends AppCompatActivity {
                     }
                     //Log.i("Monster","Score Monde: "+ String.valueOf(ScoreMonde));
                 }
+                payer();
                 info.setText("Vie: " + String.valueOf(vie));
                 Gold.setText("Gold: " + String.valueOf(compteur));
                 Force.setText("Force: " + String.valueOf(puissance));
@@ -161,6 +166,13 @@ public class LesMecaniques extends AppCompatActivity {
                 ChangerFond();
                 myView.setBackgroundResource(Fond[FondAcutelle]);
                 mHandler.postDelayed(this,1);
+            }
+        });
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                vie= vie-puissance;
+                mHandler.postDelayed(this,1000);
             }
         });
 
@@ -219,7 +231,40 @@ public class LesMecaniques extends AppCompatActivity {
 
             }
         });
+        final RelativeLayout.LayoutParams layoutparamsGuidl = (RelativeLayout.LayoutParams)parti_Guild.getLayoutParams();
+        final RelativeLayout.LayoutParams layoutparamsbuttonGuidl = (RelativeLayout.LayoutParams)guild.getLayoutParams();
+        guild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if(on_Guild)
+                {
+
+                    //Toast.makeText(LesMecaniques.this,"Amelioration", Toast.LENGTH_SHORT).show();
+                    on_Guild = false;
+                    layoutparamsGuidl.setMargins(0,0,0,0);
+                    layoutparamsbuttonGuidl.setMargins(550,0,0,0);
+                    layoutparamsGuidl.height = 1000;
+                    layoutparamshaut.setMargins(0,1100,0,0);
+                }
+                else
+                {
+                    //Toast.makeText(LesMecaniques.this,"Marche pas", Toast.LENGTH_SHORT).show();
+                    on_Guild = true;
+                    layoutparamsGuidl.setMargins(0,5000,0,0);
+                    layoutparamsbuttonGuidl.setMargins(0,1000,0,0);
+                    layoutparamshaut.setMargins(0,0,0,0);
+                    //layoutparamsGuidl.height = 600;
+                }
+
+
+                parti_Guild.setLayoutParams(layoutparamsGuidl);
+                guild.setLayoutParams(layoutparamsbuttonGuidl);
+                test.setLayoutParams(layoutparamshaut);
+
+
+            }
+        });
 
 
     }
@@ -259,6 +304,89 @@ public class LesMecaniques extends AppCompatActivity {
         }
 
 
+    }
+
+    void payer()
+    {
+        //Log.i("Argent","1");
+        //Log.i("Argent",String.valueOf(PuissancRecu));
+        switch (PuissancRecu)
+        {
+            case 10:
+                    if (compteur >= Integer.valueOf(ListPrixArme[0]))
+                    {
+                        compteur = compteur - Integer.valueOf(ListPrixArme[0]);
+                        Log.i("Argent","Acheter bois");
+                        puissance = puissance + PuissancRecu;
+
+                    }
+                    else
+                    {
+                        Log.i("Argent","Refuser bois");
+                        Toast.makeText(LesMecaniques.this,"Pas assez d'argent", Toast.LENGTH_SHORT).show();
+                    }
+                break;
+            case 30:
+                if (compteur >= Integer.valueOf(ListPrixArme[1]))
+                {
+                    compteur = compteur - Integer.valueOf(ListPrixArme[1]);
+                    Log.i("Argent","Acheter pierre");
+                    puissance = puissance + PuissancRecu;
+
+                }
+                else
+                {
+                    Log.i("Argent","Refuser pierre");
+                    Toast.makeText(LesMecaniques.this,"Pas assez d'argent", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case 60:
+                if (compteur >= Integer.valueOf(ListPrixArme[2]))
+                {
+                    compteur = compteur - Integer.valueOf(ListPrixArme[2]);
+                    Log.i("Argent","Acheter fer");
+                    puissance = puissance + PuissancRecu;
+
+                }
+                else
+                {
+                    Log.i("Argent","Refuser fer");
+                    Toast.makeText(LesMecaniques.this,"Pas assez d'argent", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case 90:
+                if (compteur >= Integer.valueOf(ListPrixArme[3]))
+                {
+                    compteur = compteur - Integer.valueOf(ListPrixArme[3]);
+                    Log.i("Argent","Acheter or");
+                    puissance = puissance + PuissancRecu;
+
+                }
+                else
+                {
+                    Log.i("Argent","Refuser or");
+                    Toast.makeText(LesMecaniques.this,"Pas assez d'argent", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case 150:
+                if (compteur >= Integer.valueOf(ListPrixArme[4]))
+                {
+                    compteur = compteur - Integer.valueOf(ListPrixArme[4]);
+                    Log.i("Argent","Acheter diamant");
+                    puissance = puissance + PuissancRecu;
+
+                }
+                else
+                {
+                    Log.i("Argent","Refuser diamant");
+                    Toast.makeText(LesMecaniques.this,"Pas assez d'argent", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+        PuissancRecu = 0;
     }
 
 
