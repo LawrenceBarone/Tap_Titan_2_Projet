@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(checkDataBase() == true){
             startActivity(Jeux);
+            toastMessage("db is already created");
+        }else{
+            toastMessage("db not created");
         }
         TapTitre.setOnClickListener(new View.OnClickListener() {
             @Override
