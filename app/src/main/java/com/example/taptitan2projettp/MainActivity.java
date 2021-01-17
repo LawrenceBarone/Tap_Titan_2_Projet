@@ -47,16 +47,8 @@ public class MainActivity extends AppCompatActivity {
         mDatabaseHelper = new DatabaseHelper(this);
         valide = findViewById(R.id.button2);
         lieuxnom = findViewById(R.id.editTextTextPersonName);
-        if(test == 1){
-            startActivity(Jeux);
-        }
-        checkDataBase();
-        if(checkDataBase() == true){
-            startActivity(Jeux);
-            toastMessage("db is already created");
-        }else{
-            toastMessage("db not created");
-        }
+
+
         test = 0;
         TapTitre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +72,46 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(Jeux);
             }
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        checkSession();
+    }
+    private void checkSession() {
+        //check if user is logged in
+        //if user is logged in --> move to mainActivity
+
+        SessionManagement sessionManagement = new SessionManagement(MainActivity.this);
+        int userID = sessionManagement.getSession();
+
+        if(userID != -1){
+            //user id logged in and so move to mainActivity
+            moveToMainActivity();
+        }
+        else{
+            //do nothing
+        }
+    }
+
+    public void login(View view) {
+        // 1.log in to app and save session of user
+        // 2. move to mainActivity
+
+        //1. login and save session
+        User user = new User(lieuxnom.getText().toString());
+        SessionManagement sessionManagement = new SessionManagement(MainActivity.this);
+        sessionManagement.saveSession(user);
+
+        //2. step
+        moveToMainActivity();
+    }
+
+    private void moveToMainActivity() {
+        Intent intent = new Intent(MainActivity.this, LesMecaniques.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
     private static boolean checkDataBase(){
         SQLiteDatabase checkDB = null;

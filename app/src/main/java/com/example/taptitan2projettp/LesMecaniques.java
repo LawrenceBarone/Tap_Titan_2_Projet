@@ -408,5 +408,18 @@ public class LesMecaniques extends AppCompatActivity {
         PuissancRecu = 0;
     }
 
+    public void logout(View view) {
+        //this method will remove session and open login screen
+        SessionManagement sessionManagement = new SessionManagement(LesMecaniques.this);
+        sessionManagement.removeSession();
 
+        moveToLogin();
+    }
+
+    private void moveToLogin() {
+        Intent intent = new Intent(LesMecaniques.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 }
+
