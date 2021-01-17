@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -117,6 +118,7 @@ public class LesMecaniques extends AppCompatActivity {
         on_Guild = false;
         Force.setText("Force: " + String.valueOf(puissance));
         ScoreMonde = 0;
+
         Handler mHandler = new Handler();
         this.runOnUiThread(new Runnable() {
             @Override
@@ -149,6 +151,13 @@ public class LesMecaniques extends AppCompatActivity {
                     }
                     //Log.i("Monster","Score Monde: "+ String.valueOf(ScoreMonde));
                 }
+                guild.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(LesMecaniques.this, ListDataActivity.class);
+                        startActivity(intent);
+                    }
+                });
                 payer();
                 info.setText("Vie: " + String.valueOf(vie));
                 Gold.setText("Gold: " + String.valueOf(compteur));
@@ -231,40 +240,40 @@ public class LesMecaniques extends AppCompatActivity {
 
             }
         });
-        final RelativeLayout.LayoutParams layoutparamsGuidl = (RelativeLayout.LayoutParams)parti_Guild.getLayoutParams();
-        final RelativeLayout.LayoutParams layoutparamsbuttonGuidl = (RelativeLayout.LayoutParams)guild.getLayoutParams();
-        guild.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(on_Guild)
-                {
-
-                    //Toast.makeText(LesMecaniques.this,"Amelioration", Toast.LENGTH_SHORT).show();
-                    on_Guild = false;
-                    layoutparamsGuidl.setMargins(0,0,0,0);
-                    layoutparamsbuttonGuidl.setMargins(550,0,0,0);
-                    layoutparamsGuidl.height = 1000;
-                    layoutparamshaut.setMargins(0,1100,0,0);
-                }
-                else
-                {
-                    //Toast.makeText(LesMecaniques.this,"Marche pas", Toast.LENGTH_SHORT).show();
-                    on_Guild = true;
-                    layoutparamsGuidl.setMargins(0,5000,0,0);
-                    layoutparamsbuttonGuidl.setMargins(0,1000,0,0);
-                    layoutparamshaut.setMargins(0,0,0,0);
-                    //layoutparamsGuidl.height = 600;
-                }
-
-
-                parti_Guild.setLayoutParams(layoutparamsGuidl);
-                guild.setLayoutParams(layoutparamsbuttonGuidl);
-                test.setLayoutParams(layoutparamshaut);
-
-
-            }
-        });
+        //final RelativeLayout.LayoutParams layoutparamsGuidl = (RelativeLayout.LayoutParams)parti_Guild.getLayoutParams();
+        //final RelativeLayout.LayoutParams layoutparamsbuttonGuidl = (RelativeLayout.LayoutParams)guild.getLayoutParams();
+        //guild.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+//
+        //        if(on_Guild)
+        //        {
+//
+        //            //Toast.makeText(LesMecaniques.this,"Amelioration", Toast.LENGTH_SHORT).show();
+        //            on_Guild = false;
+        //            layoutparamsGuidl.setMargins(0,0,0,0);
+        //            layoutparamsbuttonGuidl.setMargins(550,0,0,0);
+        //            layoutparamsGuidl.height = 1000;
+        //            layoutparamshaut.setMargins(0,1100,0,0);
+        //        }
+        //        else
+        //        {
+        //            //Toast.makeText(LesMecaniques.this,"Marche pas", Toast.LENGTH_SHORT).show();
+        //            on_Guild = true;
+        //            layoutparamsGuidl.setMargins(0,5000,0,0);
+        //            layoutparamsbuttonGuidl.setMargins(0,1000,0,0);
+        //            layoutparamshaut.setMargins(0,0,0,0);
+        //            //layoutparamsGuidl.height = 600;
+        //        }
+//
+//
+        //        parti_Guild.setLayoutParams(layoutparamsGuidl);
+        //        guild.setLayoutParams(layoutparamsbuttonGuidl);
+        //        test.setLayoutParams(layoutparamshaut);
+//
+//
+        //    }
+        //});
 
 
     }

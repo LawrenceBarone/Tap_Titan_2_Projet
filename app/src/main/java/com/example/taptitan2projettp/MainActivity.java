@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnGuild = (Button) findViewById(R.id.buttonGuild);
+        //btnGuild = (Button) findViewById(R.id.buttonGuild);
         Jeux = new Intent(getApplicationContext(),LesMecaniques.class);
         TapTitre =findViewById(R.id.LeNom);
         mDatabaseHelper = new DatabaseHelper(this);
@@ -51,13 +51,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Retournom = lieuxnom.getText();
                 nom = String.valueOf(Retournom);
-                startActivity(Jeux);
-            }
-        });
-
-        valide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 String newEntry = lieuxnom.getText().toString();
                 if (lieuxnom.length() != 0) {
                     AddData(newEntry);
@@ -65,17 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     toastMessage("You must put something in the text field!");
                 }
-
+                startActivity(Jeux);
             }
         });
 
-        btnGuild.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
 
     }
     public void AddData(String newEntry) {
