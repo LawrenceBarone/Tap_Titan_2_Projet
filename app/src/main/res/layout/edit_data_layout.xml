@@ -28,13 +28,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="DELETE"
+        android:text="KICK"
         android:id="@+id/btnDelete"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="SAVE"
+        android:text="PROMOTE"
         android:layout_toRightOf="@+id/btnDelete"
         android:id="@+id/btnSave"/>
     </LinearLayout>

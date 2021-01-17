@@ -2,7 +2,10 @@ package com.example.taptitan2projettp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -14,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -24,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Intent Jeux;
     TextView TapTitre;
     //String nom;
-    Button valide,btnGuild;
+    Button valide;
     String NomJeux;
     EditText lieuxnom;
 
@@ -37,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         Jeux = new Intent(getApplicationContext(),LesMecaniques.class);
         TapTitre =findViewById(R.id.LeNom);
         mDatabaseHelper = new DatabaseHelper(this);
+        valide = findViewById(R.id.button2);
+        lieuxnom = findViewById(R.id.editTextTextPersonName);
+
 
         TapTitre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(Jeux);
             }
         });
-        valide = findViewById(R.id.button2);
-        lieuxnom = findViewById(R.id.editTextTextPersonName);
+
         valide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,11 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(Jeux);
             }
         });
-
-
-
-
     }
+
     public void AddData(String newEntry) {
         boolean insertData = mDatabaseHelper.addData(newEntry);
 

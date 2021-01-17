@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL2 = "name";
     private static final String COL3 = "power";
     private static final String COL4 = "stage";
+    private static final String COL5 = "gold";
 
 
     public DatabaseHelper(Context context) {
@@ -30,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME_P + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL2 +" TEXT," + COL3 +" INTEGER," + COL4 +" INTEGER" +")";
+                COL2 +" TEXT," + COL3 +" INTEGER," + COL4 +" INTEGER," + COL5 +" INTEGER" + ")";
         db.execSQL(createTable);
     }
 
@@ -57,15 +58,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    
-    public boolean addInfo(Integer power,Integer stage){
+
+    public boolean addInfo(Integer power,Integer stage, Integer gold){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL3, power);
         contentValues.put(COL4, stage);
+        contentValues.put(COL5, gold);
 
 
-        Log.d(TAG, "addData: Adding " + power + stage + " to " + TABLE_NAME_P);
+        Log.d(TAG, "addData: Adding " + power + stage + gold + " to " + TABLE_NAME_P);
 
         long result = db.insert(TABLE_NAME_P, null, contentValues);
 
@@ -116,7 +118,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "updateName: Setting name to " + newName);
         db.execSQL(query);
     }
-
+    public void updateplayer(Integer power, Integer stage, Integer gold){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME_P + " SET " + COL3 +
+                " = '" + power + "' SET " + COL4 + " = '" + stage + "'" +
+                " SET " + COL5 + " = '" + gold + "'";
+        Log.d(TAG, "updateName: query: " + query);
+        Log.d(TAG, "updateName: Setting name to " + power + stage + gold);
+        db.execSQL(query);
+    }
     /**
      * Delete from database
      * @param id

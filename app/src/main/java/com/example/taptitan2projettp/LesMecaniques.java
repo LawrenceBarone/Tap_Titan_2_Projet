@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class LesMecaniques extends AppCompatActivity {
 
-
+    DatabaseHelper mDatabaseHelper;
     MediaPlayer mediaPlayer;
     private static int puissance,PuissancRecu;
     public static int compteur;
@@ -120,6 +120,14 @@ public class LesMecaniques extends AppCompatActivity {
         ScoreMonde = 0;
 
         Handler mHandler = new Handler();
+
+        guild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LesMecaniques.this, ListDataActivity.class);
+                startActivity(intent);
+            }
+        });
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -159,6 +167,7 @@ public class LesMecaniques extends AppCompatActivity {
                     }
                 });
                 payer();
+                mDatabaseHelper.updateplayer(puissance,Score,compteur);
                 info.setText("Vie: " + String.valueOf(vie));
                 Gold.setText("Gold: " + String.valueOf(compteur));
                 Force.setText("Force: " + String.valueOf(puissance));
