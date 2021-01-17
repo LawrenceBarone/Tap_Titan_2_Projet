@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         mDatabaseHelper = new DatabaseHelper(this);
         valide = findViewById(R.id.button2);
         lieuxnom = findViewById(R.id.editTextTextPersonName);
-
+        checkDataBase();
         if(checkDataBase() == true){
             startActivity(Jeux);
             toastMessage("db is already created");
