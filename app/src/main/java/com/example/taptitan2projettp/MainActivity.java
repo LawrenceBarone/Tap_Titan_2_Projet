@@ -12,15 +12,19 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+    DatabaseHelper mDatabaseHelper;
 
     public static Editable Retournom;
     public static String nom;
     Intent Jeux;
     TextView TapTitre;
     //String nom;
-    Button valide;
+    Button valide,btnGuild;
     String NomJeux;
     EditText lieuxnom;
 
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        btnGuild = (Button) findViewById(R.id.buttonGuild);
         Jeux = new Intent(getApplicationContext(),LesMecaniques.class);
         TapTitre =findViewById(R.id.LeNom);
 
@@ -50,6 +54,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        valide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newEntry = lieuxnom.getText().toString();
+                if (lieuxnom.length() != 0) {
+                    AddData(newEntry);
+                    lieuxnom.setText("");
+                } else {
+                    toastMessage("You must put something in the text field!");
+                }
+
+            }
+        });
+
+        btnGuild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+    public void AddData(String newEntry) {
+        boolean insertData = mDatabaseHelper.addData(newEntry);
+
+        if (insertData) {
+            toastMessage("Data Successfully Inserted!");
+        } else {
+            toastMessage("Something went wrong");
+        }
+    }
+
+    /**
+     * customizable toast
+     * @param message
+     */
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
 }
