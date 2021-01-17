@@ -68,7 +68,7 @@ public class ListDataActivity extends AppCompatActivity {
                 }
                 if(itemID > -1){
                     Log.d(TAG, "onItemClick: The ID is: " + itemID);
-                    Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
+                    Intent editScreenIntent = new Intent(ListDataActivity.this, TestActivity.class);
                     editScreenIntent.putExtra("id",itemID);
                     editScreenIntent.putExtra("name",name);
                     startActivity(editScreenIntent);
