@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         btnGuild = (Button) findViewById(R.id.buttonGuild);
         Jeux = new Intent(getApplicationContext(),LesMecaniques.class);
         TapTitre =findViewById(R.id.LeNom);
+        mDatabaseHelper = new DatabaseHelper(this);
 
         TapTitre.setOnClickListener(new View.OnClickListener() {
             @Override
