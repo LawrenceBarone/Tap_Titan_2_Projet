@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Button valide;
     String NomJeux;
     EditText lieuxnom;
+    public static int test ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         mDatabaseHelper = new DatabaseHelper(this);
         valide = findViewById(R.id.button2);
         lieuxnom = findViewById(R.id.editTextTextPersonName);
+        if(test == 1){
+            startActivity(Jeux);
+        }
         checkDataBase();
         if(checkDataBase() == true){
             startActivity(Jeux);
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             toastMessage("db not created");
         }
+        test = 0;
         TapTitre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private boolean checkDataBase(){
+    private static boolean checkDataBase(){
         SQLiteDatabase checkDB = null;
         try{
             checkDB = SQLiteDatabase.openDatabase(DB_FULL_PATH,null,SQLiteDatabase.OPEN_READONLY);
@@ -94,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             toastMessage("Something went wrong");
         }
+        test = 1;
     }
 
     /**
