@@ -86,6 +86,7 @@ public class LesMecaniques extends AppCompatActivity {
 
         View myView =  this.findViewById(R.id.Background);
 
+        mDatabaseHelper = new DatabaseHelper(this);
         mediaPlayer = new MediaPlayer();
         mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.musique);
         mediaPlayer.setLooping(true);
@@ -167,7 +168,7 @@ public class LesMecaniques extends AppCompatActivity {
                     }
                 });
                 payer();
-                mDatabaseHelper.updateplayer(puissance,Score,compteur);
+                mDatabaseHelper.addInfo(puissance,Score,compteur);
                 info.setText("Vie: " + String.valueOf(vie));
                 Gold.setText("Gold: " + String.valueOf(compteur));
                 Force.setText("Force: " + String.valueOf(puissance));

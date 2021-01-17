@@ -121,8 +121,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void updateplayer(Integer power, Integer stage, Integer gold){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_P + " SET " + COL3 +
-                " = '" + power + "' SET " + COL4 + " = '" + stage + "'" +
-                " SET " + COL5 + " = '" + gold + "'";
+                " = '" + power + "' AND " + COL4 + " = '" + stage + "'" +
+                " AND " + COL5 + " = '" + gold + "'";
         Log.d(TAG, "updateName: query: " + query);
         Log.d(TAG, "updateName: Setting name to " + power + stage + gold);
         db.execSQL(query);
