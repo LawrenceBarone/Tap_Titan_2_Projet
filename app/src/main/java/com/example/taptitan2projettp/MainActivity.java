@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     DatabaseHelper mDatabaseHelper;
+    private static String DB_FULL_PATH = "/data/data/YOUR_PACKAGE/databases/";
 
     public static Editable Retournom;
     public static String nom;
@@ -45,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
         valide = findViewById(R.id.button2);
         lieuxnom = findViewById(R.id.editTextTextPersonName);
 
-
+        if(checkDataBase() == true){
+            startActivity(Jeux);
+        }
         TapTitre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +73,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private boolean checkDataBase(){
+        SQLiteDatabase checkDB = null;
+        try{
+            checkDB = SQLiteDatabase.openDatabase(DB_FULL_PATH,null,SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+        }catch(SQLException e){
 
+        }
+        return checkDB != null;
+    }
     public void AddData(String newEntry) {
         boolean insertData = mDatabaseHelper.addData(newEntry);
 

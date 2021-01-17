@@ -45,6 +45,7 @@ public class ListDataActivity extends AppCompatActivity {
         //get the data and append to a list
         Cursor data = mDatabaseHelper.getData();
         ArrayList<String> listData = new ArrayList<>();
+
         while(data.moveToNext()){
             //get the value from the database in column 1
             //then add it to the ArrayList
